@@ -1,0 +1,169 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, Box, Link } from 'theme-ui';
+import { Scrollbars } from 'react-custom-scrollbars';
+import Drawer from '../../components/drawer';
+import { DrawerContext } from '../../contexts/drawer/drawer.context';
+import { IoMdClose, IoMdMenu } from 'react-icons/io';
+import { Link as ScrollLink } from 'react-scroll';
+import MENU_DATA from './headerIn.data';
+import Logo from '../logo';
+import logoDark from '../../assets/logo.svg';
+import { useRouter } from 'next/router';
+import Moralis from 'moralis'
+
+const MobileDrawer = () => {
+  const { state, dispatch } = useContext(DrawerContext);
+
+  const router = useRouter();
+
+  const logoutFromWallet = () => {
+    Moralis.User.logOut()
+    router.push('/');
+  }
+
+  // Toggle drawer
+  const toggleHandler = React.useCallback(() => {
+    dispatch({
+      type: 'TOGGLE',
+    });
+  }, [dispatch]);
+
+  return (
+    <Drawer
+      width="320px"
+      drawerHandler={
+        <Box sx={styles.handler}>
+          <IoMdMenu size="22px" />
+        </Box>
+      }
+      open={state.isOpen}
+      toggleHandler={toggleHandler}
+      closeButton={<IoMdClose size="24px" color="#02073E" />}
+      drawerStyle={styles.drawer}
+      closeBtnStyle={styles.close}
+    >
+      <Scrollbars autoHide>
+        <Box sx={styles.content}>
+          <Logo image={logoDark} />
+          <Box sx={styles.menu}>
+            {MENU_DATA.map(({ path, label }, i) => (
+              <ScrollLink
+                activeClass="active"
+                to={path}
+                spy={true}
+                smooth={true}
+                offset={10}
+                duration={500}
+                key={i}
+              >
+                {label}
+              </ScrollLink>
+            ))}
+          </Box>
+          <ScrollLink>
+            <button type="button" class="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+              Update Profile
+            </button>
+          </ScrollLink>
+          <ScrollLink>
+            <button type="button" onClick={()=>{logoutFromWallet()}} class="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+              Sign out
+            </button>
+          </ScrollLink>
+        </Box>
+      </Scrollbars>
+    </Drawer>
+  );
+};
+
+const styles = {
+  handler: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: '0',
+    width: '26px',
+    cursor: 'pointer',
+    '@media screen and (min-width: 1024px)': {
+      display: 'none',
+    },
+  },
+
+  drawer: {
+    width: '100%',
+    height: '100%',
+    background: '#fff',
+  },
+
+  close: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    cursor: 'pointer',
+    top: '36px',
+    right: '30px',
+    zIndex: '1',
+  },
+
+  content: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    textAlign: 'center',
+    flexDirection: 'column',
+    pt: '30px',
+    pb: '40px',
+    px: '30px',
+  },
+
+  menu: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '30px',
+    textAlign: 'center',
+
+    a: {
+      fontSize: '16px',
+      fontWeight: '400',
+      color: 'black',
+      py: 2,
+      cursor: 'pointer',
+      transition: 'all 0.3s',
+      '&:hover, &:focus': {
+        color: 'primary',
+      },
+    },
+  },
+
+  menuFooter: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    mt: 'auto',
+  },
+
+  button: {
+    fontSize: '15px',
+    fw: '700',
+    height: '48px',
+    borderRadius: '3px',
+    cursor: 'pointer',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    py: '0',
+    backgroundColor: 'black',
+    color: '#fff',
+    fontFamily: 'body',
+    transition: 'all 0.25s',
+    '&:hover': {
+      opacity: 0.85,
+    },
+  },
+};
+
+export default MobileDrawer;
