@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic NFT - ETH Global 2021
 
-## Getting Started
+[![NFTs](https://coinchapter-f476.kxcdn.com/wp-content/uploads/2021/02/NFT-Digital-Art-Kobe-Bryant.jpg "NFTs")](https://coinchapter-f476.kxcdn.com/wp-content/uploads/2021/02/NFT-Digital-Art-Kobe-Bryant.jpg "NFTs")
 
-First, run the development server:
+NFTs are a very interesting tool that will undoubtedly revolutionize the world of digital ownership. For now, the concept of NFT is closely related to the metadata that defines its properties, characteristics and interface. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+But what if NFT could become dynamic? 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+What if NFT could represent the history and the historical data of an asset?
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This is an experiment to improve the world of NFT, to make it take a step forward towards a mainstream future where digital ownership will allow the exchange of stories, ideas and moments. 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Cheers!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## UI
 
-## Learn More
+*Under Development*
 
-To learn more about Next.js, take a look at the following resources:
+## Contracts 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*Under Development*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Gianmarco Guazzo, hacking solo :)
