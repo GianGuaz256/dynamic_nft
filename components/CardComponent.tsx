@@ -77,6 +77,7 @@ const CardDetailToken = (props: Props) => {
                                     src="https://ipfs.io/ipfs/QmeWK2BwtsEsSmRDMwmwCT5PADbyku2Xik5sXtsVQVC9Gw?filename=HE-SLEEP.jpeg"
                                     width={320}
                                     height={320}
+                                    alt="Image Card Component"
                                 />
                             </div>
                             <div className="w-full">

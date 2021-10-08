@@ -11,22 +11,26 @@ import HeaderLoggedIn from './headerLoggedIn/headerIn';
 import Footer from './footer/footer';
 import { useMoralis } from 'react-moralis'
 
+type Props = {
+  children: React.ReactNode;
+  logged: boolean;
+  modalOpen?: boolean;
+}
 
-
-export default function Layout({ children, logged }) {
+export default function Layout(props: Props) {
 
   const { authenticate, isAuthenticated, user} = useMoralis();
 
   useEffect(()=>{
     console.log(isAuthenticated)
-    if(isAuthenticated && (logged == true)){
+    if(isAuthenticated && (props.logged == true)){
       setLoggedIn(true)
     }
-  })
+  }, [isAuthenticated, props.logged])
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const isSticky = useStickyState('isSticky');
-  const isLoggedIn = useStickyState('logged');
+  const isSticky = useStickyState('isSticky' as any);
+  const isLoggedIn = useStickyState('logged' as any);
   const dispatch = useStickyDispatch();
   const setSticky = useCallback(() => dispatch({ type: 'SET_STICKY' }), [
     dispatch,
@@ -38,7 +42,7 @@ export default function Layout({ children, logged }) {
     dispatch,
   ]);
 
-  const onWaypointPositionChange = ({ currentPosition }) => {
+  const onWaypointPositionChange = (currentPosition: any) => {
     if (currentPosition === 'above') {
       setSticky();
     }
@@ -51,7 +55,7 @@ export default function Layout({ children, logged }) {
     <React.Fragment>
       {loggedIn ? (
         <>
-        <Sticky enabled={isSticky} innerZ={991}>
+        <Sticky enabled={isSticky} innerZ={40}>
           <HeaderLoggedIn 
             logoutSite={()=>setLoggedOut()} 
             className={`${isSticky ? 'sticky' : 'unSticky'}`} />
@@ -59,14 +63,14 @@ export default function Layout({ children, logged }) {
         <Waypoint
           onEnter={removeSticky}
           // onLeave={setSticky}
-          onPositionChange={onWaypointPositionChange}
+          onPositionChange={(obj)=>{onWaypointPositionChange(obj)}}
         />
         <main
           sx={{
             variant: 'layout.main',
           }}
         >
-          {children}
+          {props.children}
         </main>
         </>
       ) : (
@@ -77,14 +81,14 @@ export default function Layout({ children, logged }) {
         <Waypoint
           onEnter={removeSticky}
           // onLeave={setSticky}
-          onPositionChange={onWaypointPositionChange}
+          onPositionChange={(obj)=>{onWaypointPositionChange(obj)}}
         />
         <main
           sx={{
             variant: 'layout.main',
           }}
         >
-          {children}
+          {props.children}
         </main>
         <Footer />
         </>

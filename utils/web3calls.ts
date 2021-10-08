@@ -58,3 +58,7 @@ export const getTokenOfOwnerData = async(address:string) => {
 export const getNumberOfTokenOwned = async(address:string) => {
     return await dynamicNFT.methods.balanceOf(address).call();
 }
+
+export const getDynamicTokenData = async(id:string) => {
+    return await dynamicNFT.methods.getDynamiData(id).call({from: account.address});
+}

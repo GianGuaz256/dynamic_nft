@@ -2,15 +2,13 @@
 /** @jsx jsx */
 import { jsx, Container, Flex, Link } from 'theme-ui';
 import { Link as ScrollLink } from 'react-scroll';
-import Logo from '../logo';
 import { DrawerProvider } from '../../contexts/drawer/drawer.provider';
 import MobileDrawer from './mobileDrawer';
 import MENU_DATA from './headerIn.data';
-import logoDark from '../../assets/logo.svg';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMoralis } from 'react-moralis';
 import Moralis from 'moralis'
+import Image from 'next/image'
 
 export default function HeaderIn({ className, logoutSite }) {
 
@@ -58,22 +56,30 @@ export default function HeaderIn({ className, logoutSite }) {
               </ScrollLink>
             ))}
             <Link sx={styles.btn} to="">
-              <div class="relative inline-block text-left">
+              <div className="relative inline-block text-left">
               <div>
-                <button type="button" onClick={()=>{setIsClicked(!isClicked)}} class="inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-full bg-white text-sm font-medium text-black" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                  <img class="h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""></img>
+                <button type="button" onClick={()=>{setIsClicked(!isClicked)}} className="inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-full bg-white text-sm font-medium text-black" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                  <div className="h-10 w-10 rounded-full ring-2 ring-white">
+                    <Image 
+                      src={"https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
+                      alt=""
+                      layout="fill"
+                      style={{borderRadius: '100%'}}
+                    />
+                  </div>
+                  {/*<img className="h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""></img>*/}
                 </button>
               </div>
               {isClicked? (
-              <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-                <div class="py-1" role="none">
+              <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+                <div className="py-1" role="none">
                   <form method="POST" action="#" role="none">
-                    <button type="submit" class="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-3">
+                    <button type="submit" className="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-3">
                       Update Profile
                     </button>
                   </form>
                   <form method="POST" action="#" role="none">
-                    <button type="submit" onClick={()=>{logoutFromWallet()}} class="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-3">
+                    <button type="submit" onClick={()=>{logoutFromWallet()}} className="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-3">
                       Sign out
                     </button>
                   </form>

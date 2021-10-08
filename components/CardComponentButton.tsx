@@ -9,7 +9,8 @@ type Props = {
     uri: string;
     index: string;
     modify: boolean;
-    onClick: () => void;
+    onClick?: () => void;
+    onClickUpdate?: () => void;
 }
 
 const CardDetailTokenWithButton = (props: Props) => {
@@ -77,13 +78,14 @@ const CardDetailTokenWithButton = (props: Props) => {
                                 src="https://ipfs.io/ipfs/QmeWK2BwtsEsSmRDMwmwCT5PADbyku2Xik5sXtsVQVC9Gw?filename=HE-SLEEP.jpeg"
                                 width={320}
                                 height={320}
+                                alt="Image Card Component"
                             />
                         </div>
                         {props.modify? (
                             <div className="w-full">
                                 <div className="w-full flex justify-around p-4">
-                                    <button onClick={()=>{props.onClick}} className="mb-2 md:mb-0 border px-8 py-4 text-sm shadow-sm font-medium tracking-wider text-black rounded-xl hover:shadow-lg hover:bg-blue-400">View</button>
-                                    <button onClick={()=>{props.onClick}} className="mb-2 md:mb-0 border px-8 py-4 text-sm shadow-sm font-medium tracking-wider text-black rounded-xl hover:shadow-lg hover:bg-yellow-400">Update</button>
+                                    <button onClick={props.onClick} className="mb-2 md:mb-0 border px-8 py-4 text-sm shadow-sm font-medium tracking-wider text-black rounded-xl hover:shadow-lg hover:bg-blue-400">View</button>
+                                    <button onClick={props.onClickUpdate} className="mb-2 md:mb-0 border px-8 py-4 text-sm shadow-sm font-medium tracking-wider text-black rounded-xl hover:shadow-lg hover:bg-yellow-400">Update</button>
                                 </div>               
                             </div>
                         ) : (

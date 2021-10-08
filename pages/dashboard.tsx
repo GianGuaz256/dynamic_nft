@@ -12,6 +12,7 @@ import addressDash from '../assets/addressDash.png';
 import { useMoralis } from 'react-moralis';
 import CardComponentButton from '../components/CardComponentButton';
 import Modal from '../components/ModalItem';
+import ModalUpdate from '../components/ModalItemUpdate';
 
 const Dashboard = () => {
 
@@ -27,13 +28,12 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [nftData, setNftsData] = useState<Data[]>([]);
     const [showModal, setShowModal] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [objectClicked, setObjectClicked] = useState<Data>();
 
     useEffect(()=>{
         setLoading(true);
         const address = user?.get('ethAddress');
-        let data: string[];
-        let lenght: number;
         getDashboardInfo(address)
         .then(result=>{
             setNftsData(result.data)
@@ -41,7 +41,7 @@ const Dashboard = () => {
         }).catch(e=>console.log(e));
         setAddress(address);
         setLoading(false)
-    }, [])
+    }, [user])
 
     const formatAddress = ():string => {
         let first = address.slice(0, 4);
@@ -61,13 +61,17 @@ const Dashboard = () => {
     return (
         <ThemeProvider theme={theme as Theme}>
             <StickyProvider>
-                <Layout logged={true}>
+                <Layout 
+                    logged={true}
+                    modalOpen={showModal}
+                >
                     <Container>
                         <div className="w-full min-h-screen mt-32">
                             <h1 className="text-4xl font-bold">Dashboard</h1>
                             <div className="w-full flex justify-around items-center">
                                 <div className="flex-col justify-center items-center text-center mt-6">
                                     <Image 
+                                        alt="Token Dashboard Logo"
                                         src={tokenDash}
                                         width={100}
                                         height={100}
@@ -76,6 +80,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="flex-col justify-center items-center text-center">
                                     <Image 
+                                        alt="Address Dashboard Logo"
                                         src={addressDash}
                                         width={65}
                                         height={100}
@@ -88,15 +93,32 @@ const Dashboard = () => {
                                     <div>Loading...</div>
                                 ) : (
                                     <div className="flex justify-between flex-wrap my-6">
-                                        {showModal? (<Modal 
-                                            onClick={()=>{setShowModal(!showModal)}}
-                                            token={objectClicked? objectClicked : empty}
-                                        />) : null}
+                                            {showModal? (
+                                                <div className="fixed z-50">
+                                                    <Modal 
+                                                        onClick={()=>{setShowModal(!showModal)}}
+                                                        token={objectClicked? objectClicked : empty}
+                                                    />
+                                                </div>
+                                            ) : null}
+                                            {showModalUpdate? (
+                                                <div className="fixed z-50">
+                                                    <ModalUpdate 
+                                                        onClick={()=>{setShowModalUpdate(!showModalUpdate)}}
+                                                        token={objectClicked? objectClicked : empty}
+                                                    />
+                                                </div>
+                                            ) : null}
                                         {nftData.map((nft, i)=>{
                                             return <CardComponentButton 
                                                 uri={nft.uri}
                                                 index={nft.id}
+                                                key={i}
                                                 modify={true}
+                                                onClickUpdate={()=>{
+                                                    setShowModalUpdate(!showModalUpdate);
+                                                    setObjectClicked(nft);
+                                                }}
                                                 onClick={()=>{
                                                     setShowModal(!showModal);
                                                     setObjectClicked(nft);

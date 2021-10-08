@@ -2,10 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 
 export default function Seo({
-  description = 'Collection of free top of the line startup landing templates built using react/ next js. Free to download, simply edit and deploy! Updated weekly!',
-  author = 'RedQ, Inc.',
+  description = 'We think NFTs go far beyond static content. Every digital asset has a unique story it needs to tell, and that is why we created the first marketplace where you can buy NFTs and create your own story out of them.',
+  author = 'Guazzo Gianmarco',
   meta,
-  title = 'Startup Crypto Classic Landing',
+  title = 'Dynamic NFT Marketplace',
 }) {
   const metaData = [
     {

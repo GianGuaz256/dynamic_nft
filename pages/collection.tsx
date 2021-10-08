@@ -31,6 +31,7 @@ const Collection = (props: Props) => {
                                 {props.nfts.map((nft, i)=>{
                                     return <CardComponentButton 
                                         uri={nft}
+                                        key={i}
                                         index={i.toString()}
                                         modify={false}
                                         onClick={()=>{}}

@@ -8,50 +8,12 @@ type Props = {
     token: Data;
 }
 
-const Modal = (props: Props) => {
+const ModalUpdate = (props: Props) => {
 
-    const [loading, setLoading] = useState(false);
-    const [values, setValues] = useState({
-        title: '',
-        image: '',
-        description: '',
-        error: '',
-    });
-    const [dynamicData, setDynamicData] = useState<string[]>([])
-
-    const { title, image, description, error } = values;
 
     useEffect(()=>{
-        console.log(props)
-        loadData();
-        getDynamicData()
+        //
     }, [])
-
-    const getDynamicData = async() => {
-        const data:string[] = await getDynamicTokenData(props.token.id);
-        setDynamicData(data);
-        console.log(data);
-    }
-
-    const loadData = async() => {
-        setLoading(true);
-        return await axios.get(props.token.uri)
-            .then(function (response) {
-                console.log(response.data);
-                setValues({
-                    ...values,
-                    title: response.data.name,
-                    image: response.data.image,
-                    description: response.data.description,
-                });
-                setLoading(false);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-                setLoading(false)
-            });
-    }
 
     return(
         <>
@@ -61,7 +23,7 @@ const Modal = (props: Props) => {
                 <div className="">
                     <div className="text-center p-5 flex-auto justify-center border border-black">
                         <div className="w-full flex flex-col justify-center items-center text-center h-20 px-6 py-4">
-                            <div className="font-bold text-lg">{`${title} #${props.token.id.toString()}`}</div>
+                            <div className="font-bold text-lg">Ciao</div>
                         </div>
                         <div className="flex items-center justify-center w-full overflow-y-hidden bg-center">
                             <Image 
@@ -73,7 +35,7 @@ const Modal = (props: Props) => {
                         </div>
                         <div className="w-full">
                             <div className="w-full text-center mb-2 p-4">
-                                <p>{description}</p>
+                                <p>Ciao</p>
                             </div>               
                         </div>   
                     </div>
@@ -90,4 +52,4 @@ const Modal = (props: Props) => {
 
 }
 
-export default Modal;
+export default ModalUpdate;

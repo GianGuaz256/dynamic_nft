@@ -61,12 +61,12 @@ const MobileDrawer = () => {
             ))}
           </Box>
           <ScrollLink>
-            <button type="button" class="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+            <button type="button" className="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
               Update Profile
             </button>
           </ScrollLink>
           <ScrollLink>
-            <button type="button" onClick={()=>{logoutFromWallet()}} class="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+            <button type="button" onClick={()=>{logoutFromWallet()}} className="py-2 px-10 inline-flex justify-center w-full border border-gray-300 shadow-sm rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
               Sign out
             </button>
           </ScrollLink>
