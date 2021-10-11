@@ -32,13 +32,20 @@ const CardDetailTokenWithButton = (props: Props) => {
     }, [])
 
     const getImage = async() => {
-        /*const desiredGatewayPrefix = 'https://ipfs.io'
-        const convertedGatewayUrl = gatewayTools.convertToDesiredGateway(image, desiredGatewayPrefix);
-        console.log('IMAGE', convertedGatewayUrl)
-        setValues({
-            ...values,
-            image: convertedGatewayUrl
-        })*/
+        const desiredGatewayPrefix = 'https://ipfs.io';
+        const toBeFind = 'https://gateway.pinata.cloud'
+        if(image.includes(toBeFind)){
+            let index = image.indexOf(toBeFind)
+            console.log(index)
+            let hashed = image.slice(28, 80);
+            console.log(hashed)
+            let newWord = desiredGatewayPrefix.concat(hashed)
+            console.log(newWord)
+            setValues({
+                ...values,
+                image: newWord
+            })
+        }
     }
 
     const loadData = async() => {
@@ -75,7 +82,7 @@ const CardDetailTokenWithButton = (props: Props) => {
                         </div>
                         <div className="flex items-center justify-center w-full overflow-y-hidden bg-center">
                             <Image 
-                                src="https://ipfs.io/ipfs/QmeWK2BwtsEsSmRDMwmwCT5PADbyku2Xik5sXtsVQVC9Gw?filename=HE-SLEEP.jpeg"
+                                src={image? image.toString() : 'https://ipfs.io/ipfs/QmeWK2BwtsEsSmRDMwmwCT5PADbyku2Xik5sXtsVQVC9Gw?filename=HE-SLEEP.jpeg'}
                                 width={320}
                                 height={320}
                                 alt="Image Card Component"

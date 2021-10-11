@@ -3,7 +3,7 @@ const DynamicERC721 = require('../abi_contract/DynamicERC721.json');
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 
-var web3 = new Web3("https://rpc-mainnet.maticvigil.com");
+var web3 = new Web3("https://speedy-nodes-nyc.moralis.io/edf14b3c8fe88e8b338bfc47/polygon/mainnet");
 var account = web3.eth.accounts.privateKeyToAccount(publicRuntimeConfig.PRIVATE_KEY);
 web3.eth.accounts.wallet.add(account);
 
@@ -61,4 +61,13 @@ export const getNumberOfTokenOwned = async(address:string) => {
 
 export const getDynamicTokenData = async(id:string) => {
     return await dynamicNFT.methods.getDynamiData(id).call({from: account.address});
+}
+
+export const addDynamicTokenData = async(id:string, uri: string) => {
+    try{
+        await dynamicNFT.methods.addDataToDynamicNFT(id, uri).send({from: account.address, gas: 500000});
+    } catch(err) {
+        console.log(err)
+    }
+    return;
 }

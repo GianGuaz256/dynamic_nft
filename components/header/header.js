@@ -34,7 +34,7 @@ export default function Header({ className }) {
                 {label}
               </ScrollLink>
             ))}
-            <Link href="/login" onClick={()=>setOpenModal(!openModal)} sx={styles.btn}>
+            <Link href="/login" to="" onClick={()=>setOpenModal(!openModal)} sx={styles.btn}>
               Login
             </Link>
           </Flex>
